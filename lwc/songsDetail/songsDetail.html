@@ -1,0 +1,88 @@
+<template>
+	<lightning-card title="List of Songs">
+
+    <!-- Search box -->
+
+       <lightning-input type="search"
+            onchange={handleSearchTerm}
+             variant="label-hidden"
+             class="slds-var-m-bottom_small  slds-p-left_medium slds-p-right_medium"
+            label="Search"
+            placeholder="Search for Songs"
+            value={searchTerm}>
+       </lightning-input>
+
+
+
+    <!-- search box  -->
+
+       <template if:true={songs}>
+
+       <template if:false={isSearchNOTAvailable}>
+        
+
+            <lightning-layout multiple-rows="true">
+                <template for:each={songs} for:item="EachSong">
+                    <lightning-layout-item key={EachSong.Id} size="5" class="slds-var-p-around_x-small">
+                        
+                        <!--//////////////////////////////////////////-->
+                           <lightning-card title={EachSong.Name} class="SongCard">
+                                <div class="slds-var-p-horizontal_small">
+
+                                    <div class="slds-grid slds-wrap">
+
+                                      <!-- <div class="slds-col slds-size_6-of-12">
+                                         <img src="https://th.bing.com/th/id/R.7f34a70a5bee79488309934920d316cb?rik=IRJI6pSFo6OI%2fQ&riu=http%3a%2f%2fallpicts.in%2fwp-content%2fuploads%2f2018%2f03%2fNatural-Images-HD-1080p-Download-with-Keyhole-Arch-at-Pfeiffer-Beach.jpg&ehk=JPI0MFI04N62Xtd7MT1P2sw4vJgwODLsp1EcpgvuGFo%3d&risl=&pid=ImgRaw&r=0" alt ="No image..." class="SongImage"> 
+                                          <img src={EachSong.Image__c} alt ="No image..." class="SongImage"> 
+                                        </div>  -->
+
+                                           <div class="slds-col slds-size_6-of-12"> 
+                                              <!-- <p class="slds-var-m-bottom_xx-small"> <strong>{EachSong.Name}</strong></p> -->
+                                              <p class="slds-var-m-bottom_xx-small"><strong>{EachSong.Artists__r.Name}</strong> </p>
+                                              <p class="slds-var-m-bottom_xx-small"><strong>{EachSong.Name}</strong> </p>
+                                               <p class="slds-var-m-bottom_xx-small"> Duration : <strong>{EachSong.Duration__c} min</strong></p>
+                                               <p class="slds-var-m-bottom_xx-small">{EachSong.Album__r.Name}</p>
+                                                                                       
+                                              <!-- <p class="slds-var-m-bottom_xx-small">{EachSong.Song_link__c}</p>  -->
+                                              <a href={EachSong.Song_link__c}>Click Here to Play {EachSong.Name}</a>
+
+                                               <!-- button link -->
+                                              <audio controls="controls" class="Playbutton">
+                                                Your browser does not support the &lt;audio&gt; tag. 
+                                                <source src={EachSong.Song_link__c} />
+                                              </audio>
+                                             <!-- button link -->
+
+                                            </div>
+
+                                            <div class="slds-col slds-size_6-of-12">
+                                                <!--<img src="https://th.bing.com/th/id/R.7f34a70a5bee79488309934920d316cb?rik=IRJI6pSFo6OI%2fQ&riu=http%3a%2f%2fallpicts.in%2fwp-content%2fuploads%2f2018%2f03%2fNatural-Images-HD-1080p-Download-with-Keyhole-Arch-at-Pfeiffer-Beach.jpg&ehk=JPI0MFI04N62Xtd7MT1P2sw4vJgwODLsp1EcpgvuGFo%3d&risl=&pid=ImgRaw&r=0" alt ="No image..." class="SongImage"> -->
+                                                <img src={EachSong.Image__c} alt ="No image..." class="SongImage"> 
+                                              </div> 
+
+                                    </div>
+
+                                </div>
+
+                           </lightning-card>
+                        <!--//////////////////////////////////////////-->
+                    </lightning-layout-item>
+                </template>
+            </lightning-layout>  
+            
+
+          </template>    <!-- //// if true for search -->
+          <template if:true={isSearchNOTAvailable}>
+              <br>didn't find any song for your search...
+
+          </template>
+
+       </template>
+
+     <template if:true={error}>
+       Error Occured...........
+     </template>
+
+	</lightning-card>
+    
+</template>

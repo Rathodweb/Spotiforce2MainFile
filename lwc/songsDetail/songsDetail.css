@@ -1,0 +1,15 @@
+.SongCard{
+    border: 2px solid red;
+    border-radius: 0.25rem;
+    display: block;
+    background-color: #fae8d2;
+}
+
+.SongImage{
+    height: 130px;
+}
+
+.Playbutton{
+    height: 30px;
+    width: 220px;
+}
